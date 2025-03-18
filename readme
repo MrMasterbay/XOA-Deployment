@@ -3,3 +3,56 @@ How to use the Script:
 chmod +x deploy.sh
 
 ./deploy.sh and your done :) 
+
+What is this Script overall?
+
+This script is a Bash auto-deployment script for XOA (Xen Orchestra Appliance). It simplifies the process of downloading, configuring, and deploying XOA on an XCP-ng or XenServer host. Here's an overview of its functionality:
+Key Features:
+
+    Environment Checks:
+        Confirms the presence of the xe command (required to interact with XCP-ng/XenServer).
+        Ensures the script is executed on a compatible host (i.e., XCP-ng, XenServer, or Citrix Hypervisor).
+
+    Proxy Configuration:
+        Allows the user to optionally configure a proxy for network traffic.
+
+    Network Selection:
+        Lists available networks on the host.
+        Allows the user to select a network for the XOA deployment, with a default option pointing to the management network.
+
+    Network Configuration:
+        Supports both DHCP and static IP configuration.
+        Prompts the user for static network configuration details if DHCP is not selected (e.g., IP, netmask, gateway, DNS).
+
+    Customizations:
+        Optionally allows the user to specify custom NTP servers.
+        Configures an optional xoa SSH account password for future access.
+
+    XOA Deployment:
+        Downloads the XOA virtual appliance (XVA) file from a predefined URL (https://xoa.io/xva) or an optional local file.
+        Imports the XVA file onto the XCP-ng/XenServer host.
+        Configures the VM's network settings and NTP servers, if applicable.
+
+    VM Network Connection:
+        Ensures the VM's Virtual Interface (VIF) is connected to the selected network.
+
+    VM Startup:
+        Boots up the deployed XOA VM.
+        Waits for the VM to initialize and retrieves its IP address (via Xen tools).
+        Displays the XOA's accessible URL and default login credentials (admin@admin.net / admin).
+
+    Error Handling:
+        Exits on errors during deployment and provides guidance to contact Vates support if issues persist.
+
+    Cleanup:
+        Unsets proxy settings after deployment (if used).
+        Cleans up Xenstore data for static IP configurations.
+
+Purpose:
+
+This script is designed to streamline the deployment of XOA for users of XCP-ng or XenServer. It automates the most common setup tasks, ensuring a fast and user-friendly process to get XOA up and running.
+Usage:
+
+    Run the script on an XCP-ng or XenServer host.
+    Follow interactive prompts to specify network configuration, proxy settings, and optional customizations.
+    Upon completion, the XOA VM will be ready for use with its URL and login credentials displayed.
